@@ -1,0 +1,15 @@
+C:\Users\mustard\Documents\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\bin\Debug\net6.0\ConsoleDirectoryInfo.exe
+C:\Users\mustard\Documents\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\bin\Debug\net6.0\ConsoleDirectoryInfo.deps.json
+C:\Users\mustard\Documents\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\bin\Debug\net6.0\ConsoleDirectoryInfo.runtimeconfig.json
+C:\Users\mustard\Documents\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\bin\Debug\net6.0\ConsoleDirectoryInfo.dll
+C:\Users\mustard\Documents\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\bin\Debug\net6.0\ConsoleDirectoryInfo.pdb
+C:\Users\mustard\Documents\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\obj\Debug\net6.0\ConsoleDirectoryInfo.csproj.AssemblyReference.cache
+C:\Users\mustard\Documents\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\obj\Debug\net6.0\ConsoleDirectoryInfo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mustard\Documents\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\obj\Debug\net6.0\ConsoleDirectoryInfo.AssemblyInfoInputs.cache
+C:\Users\mustard\Documents\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\obj\Debug\net6.0\ConsoleDirectoryInfo.AssemblyInfo.cs
+C:\Users\mustard\Documents\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\obj\Debug\net6.0\ConsoleDirectoryInfo.csproj.CoreCompileInputs.cache
+C:\Users\mustard\Documents\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\obj\Debug\net6.0\ConsoleDirectoryInfo.dll
+C:\Users\mustard\Documents\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\obj\Debug\net6.0\refint\ConsoleDirectoryInfo.dll
+C:\Users\mustard\Documents\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\obj\Debug\net6.0\ConsoleDirectoryInfo.pdb
+C:\Users\mustard\Documents\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\obj\Debug\net6.0\ConsoleDirectoryInfo.genruntimeconfig.cache
+C:\Users\mustard\Documents\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\obj\Debug\net6.0\ref\ConsoleDirectoryInfo.dll
