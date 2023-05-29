@@ -12,7 +12,6 @@ namespace ConsoleDirectoryInfo
     {
         public bool[] flags;
         public FileSystemInfo[] folder;
-        public List<string[]> colums;
         public int index;
         public string path;
         
@@ -21,14 +20,18 @@ namespace ConsoleDirectoryInfo
         {
             flags =new bool[4]{ false, false, false, false };
             folder = (new DirectoryInfo(path)).GetFileSystemInfos();
-            colums = new List<string[]>();
             this.path = path;
 
         }
 
-        (List<string[]>,int) ChangeData()
+        int ChangeIndex()
         {
-            colums.Clear();
+            return index;
+        }
+
+        List<string[]> ChangeData()
+        {
+            List<string[]> colums = new List<string[]>();
             var files = folder;
 
             for (int i = 0; i < flags.Length+1; i++)
@@ -45,7 +48,7 @@ namespace ConsoleDirectoryInfo
                 }
                 else colums.Add(null);
             }
-            return (colums,index);
+            return colums;
         }
         string SetData(int param, FileSystemInfo file)
         {
@@ -70,48 +73,48 @@ namespace ConsoleDirectoryInfo
             folder = (new DirectoryInfo(path)).GetFileSystemInfos();
             this.path = path;
         }
-        public (List<string[]>, int) GetData()
+        public (List<string[]>,int) GetData()
         {
-            return ChangeData();
+            return (ChangeData(),ChangeIndex());
         }
-        public (List<string[]>, int) ChangeF1()
+        public List<string[]> ChangeF1()
         {
             flags[0] = !flags[0];
             return ChangeData();
         }
-        public (List<string[]>, int) ChangeF2()
+        public List<string[]> ChangeF2()
         {
             flags[1] = !flags[1];
             return ChangeData();
         }
-        public (List<string[]>, int) ChangeF3()
+        public List<string[]> ChangeF3()
         {
             flags[2] = !flags[2];
             return ChangeData();
         }
-        public (List<string[]>, int) ChangeF4()
+        public List<string[]> ChangeF4()
         {
             flags[3] = !flags[3];
             return ChangeData();
         }
-        public (List<string[]>, int) ChangeUpArrow()
+        public int ChangeUpArrow()
         {
             if (index > 0) index--;
-            return ChangeData();
+            return ChangeIndex();
         }
-        public (List<string[]>, int) ChangeDownArrow()
+        public int ChangeDownArrow()
         {
             if (index < folder.Length - 1) index++;
-            return ChangeData();
+            return ChangeIndex();
         }
-        public (List<string[]>, int) ChangeEnter()
+        public List<string[]> ChangeEnter()
         {
             path += "\\" + folder[index].Name;
             NewPathModel(path);
             index = 0;
             return ChangeData();
         }
-        public (List<string[]>, int) ChangeEscape()
+        public List<string[]> ChangeEscape()
         {
             if (path != "C:\\")
             {

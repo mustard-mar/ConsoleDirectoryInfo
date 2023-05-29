@@ -22,28 +22,28 @@ namespace ConsoleDirectoryInfo
                 switch (Console.ReadKey(true).Key)
                 {
                     case ConsoleKey.F1:
-                        data = model.ChangeF1();
+                        data.Item1 = model.ChangeF1();
                         break;
                     case ConsoleKey.F2:
-                        data = model.ChangeF2();
+                        data.Item1 = model.ChangeF2();
                         break;
                     case ConsoleKey.F3:
-                        data = model.ChangeF3();
+                        data.Item1 = model.ChangeF3();
                         break;
                     case ConsoleKey.F4:
-                        data = model.ChangeF4();
+                        data.Item1 = model.ChangeF4();
                         break;
                     case ConsoleKey.DownArrow:
-                        data = model.ChangeDownArrow();
+                        data.Item2 = model.ChangeDownArrow();
                         break;
                     case ConsoleKey.UpArrow:
-                        data = model.ChangeUpArrow();
+                        data.Item2 = model.ChangeUpArrow();
                         break;
                     case ConsoleKey.Enter:
-                        data = model.ChangeEnter();
+                        data.Item1 = model.ChangeEnter();
                         break;
                     case ConsoleKey.Escape:
-                        data = model.ChangeEscape();
+                        data.Item1 = model.ChangeEscape();
                         break;
                     default:
                         continue;

@@ -9,8 +9,10 @@ namespace ConsoleDirectoryInfo
 {
     public static class View
     {
+        public static (List<string[]>, int) prevView;
         public static void printData(List<string[]> model,int index)
         {
+            
             Console.Clear();
             Console.WindowHeight = Console.LargestWindowHeight;
             Console.WindowWidth = Console.LargestWindowWidth;
@@ -53,6 +55,7 @@ namespace ConsoleDirectoryInfo
             }
             Console.WriteLine();
             Console.WriteLine("Press f1,f2,f3,f4 to change colums");
+            prevView = (model, index);
         }
 
 
