@@ -18,7 +18,7 @@ namespace ConsoleDirectoryInfo
 
         public Model(string path)
         {
-            flags =new bool[4]{ false, false, false, false };
+            flags =new bool[4]{ true, true, true, true };
             folder = (new DirectoryInfo(path)).GetFileSystemInfos();
             this.path = path;
 

@@ -10,6 +10,7 @@ namespace ConsoleDirectoryInfo
     public static class View
     {
         public static (List<string[]>, int) prevView;
+        public static int[] sizeColum = { -30, 15, 20, 60, 15 };
         public static void printData(List<string[]> model,int index)
         {
             
@@ -18,22 +19,22 @@ namespace ConsoleDirectoryInfo
             Console.WindowWidth = Console.LargestWindowWidth;
             Console.SetCursorPosition(0, 0);
 
-            Console.Write("|{0,-30}", "Name");
+            Console.Write("|{0," + sizeColum[0] +"}", "Name");
             if (model[1]!=null)
             {
-                Console.Write("|{0,15}", "Size");
+                Console.Write("|{0," + sizeColum[1] +"}", "Size");
             }
             if (model[2] != null)
             {
-                Console.Write("|{0,20}", "Creation Time");
+                Console.Write("|{0," + sizeColum[2] +"}", "Creation Time");
             }
             if (model[3] != null)
             {
-                Console.Write("|{0,60}", "Attributes");
+                Console.Write("|{0," + sizeColum[3] +"}", "Attributes");
             }
             if (model[4] != null)
             {
-                Console.Write("|{0,15}", "Extension");
+                Console.Write("|{0," + sizeColum[4] +"}", "Extension");
             }
             Console.Write("|\n");
 
@@ -48,7 +49,10 @@ namespace ConsoleDirectoryInfo
                 for (int j = 0; j < model.Count; j++)
                 {
                     if (model[j]!=null)
-                        Console.Write("|{0,-30}", model[j][i].Length > 30 ? model[j][i].Substring(0, 30) : model[j][i]);
+                        Console.Write("|{0," + sizeColum[j] +"}", 
+                            model[j][i].Length > Math.Abs(sizeColum[j])?
+                            model[j][i].Substring(0, Math.Abs(sizeColum[j])) :
+                            model[j][i]);
                 }
                 Console.Write("|\n");
                 Console.ResetColor();
