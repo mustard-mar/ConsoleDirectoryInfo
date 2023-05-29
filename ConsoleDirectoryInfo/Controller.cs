@@ -15,44 +15,41 @@ namespace ConsoleDirectoryInfo
         public Controller()
         {
             Model model = new("C:\\");
-            while(true)
+            (List<string[]>, int) data = model.GetData();
+            View.printData(data.Item1, data.Item2);
+            while (true)
             {
                 switch (Console.ReadKey(true).Key)
                 {
                     case ConsoleKey.F1:
-                        model.ChangeF1();
+                        data = model.ChangeF1();
                         break;
                     case ConsoleKey.F2:
-                        model.ChangeF2();
+                        data = model.ChangeF2();
                         break;
                     case ConsoleKey.F3:
-                        model.ChangeF3();
+                        data = model.ChangeF3();
                         break;
                     case ConsoleKey.F4:
-                        model.ChangeF4();
+                        data = model.ChangeF4();
                         break;
-
-
                     case ConsoleKey.DownArrow:
-                        model.ChangeDownArrow();
+                        data = model.ChangeDownArrow();
                         break;
                     case ConsoleKey.UpArrow:
-                        model.ChangeUpArrow();
+                        data = model.ChangeUpArrow();
                         break;
                     case ConsoleKey.Enter:
-                        model.ChangeEnter();
+                        data = model.ChangeEnter();
                         break;
                     case ConsoleKey.Escape:
-                        model.ChangeEscape();
+                        data = model.ChangeEscape();
                         break;
                     default:
                         continue;
-                    
                 }
-                Console.Clear();
-                View.printData(model);
+                View.printData(data.Item1,data.Item2);
             }
-
         }
     }
 }
