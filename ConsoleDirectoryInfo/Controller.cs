@@ -16,7 +16,9 @@ namespace ConsoleDirectoryInfo
         {
             Model model = new("C:\\");
             (List<string[]>, int) data = model.GetData();
-            View.printData(data.Item1, data.Item2);
+            int isDopMess = 0;//0 - нет сообщений, 1 - сообщение о попытке открытия файла, 2 - сообщение о недоступе
+            View.PrintData(data.Item1, data.Item2, 0);
+            
             while (true)
             {
                 switch (Console.ReadKey(true).Key)
@@ -40,7 +42,7 @@ namespace ConsoleDirectoryInfo
                         data.Item2 = model.ChangeUpArrow();
                         break;
                     case ConsoleKey.Enter:
-                        data.Item1 = model.ChangeEnter();
+                        (data.Item1,isDopMess) = model.ChangeEnter();
                         break;
                     case ConsoleKey.Escape:
                         data.Item1 = model.ChangeEscape();
@@ -48,7 +50,7 @@ namespace ConsoleDirectoryInfo
                     default:
                         continue;
                 }
-                View.printData(data.Item1,data.Item2);
+                if (data.Item1!=null)View.PrintData(data.Item1,data.Item2,isDopMess);
             }
         }
     }

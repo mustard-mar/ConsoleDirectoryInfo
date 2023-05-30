@@ -149,8 +149,8 @@ namespace Program
         static void Main(string[] args)
         {
             string path = "C:\\";
-            //DirectoryMenu(path);
-            Controller cnt = new Controller();
+            DirectoryMenu(path);
+            //Controller cnt = new Controller();
 
         }
     }

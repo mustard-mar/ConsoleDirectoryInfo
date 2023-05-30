@@ -29,7 +29,7 @@ namespace ConsoleDirectoryInfo
             return index;
         }
 
-        List<string[]> ChangeData()
+        List<string[]> ChangeData(int isMess=0)
         {
             List<string[]> colums = new List<string[]>();
             var files = folder;
@@ -107,12 +107,20 @@ namespace ConsoleDirectoryInfo
             if (index < folder.Length - 1) index++;
             return ChangeIndex();
         }
-        public List<string[]> ChangeEnter()
+        public (List<string[]>,int) ChangeEnter()
         {
-            path += "\\" + folder[index].Name;
-            NewPathModel(path);
-            index = 0;
-            return ChangeData();
+            int mess = 0;
+            List<string[]> data = null;
+            if (folder[index].Extension != "") mess = 1;
+            else if (TryGetDirectory(path + "\\" + folder[index].Name))
+            {
+                    path += "\\" + folder[index].Name;
+                    NewPathModel(path);
+                    index = 0;
+                    data = ChangeData();
+            }
+            else mess = 2;
+            return (data, mess);
         }
         public List<string[]> ChangeEscape()
         {
@@ -124,6 +132,19 @@ namespace ConsoleDirectoryInfo
                 index = 0;
             }
             return ChangeData();
+        }
+        private static bool TryGetDirectory(string path)
+        {
+            try
+            {
+                DirectoryInfo test = new(path);
+                var b = test.GetDirectories();
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

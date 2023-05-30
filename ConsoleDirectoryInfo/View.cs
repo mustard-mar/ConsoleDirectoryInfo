@@ -9,15 +9,17 @@ namespace ConsoleDirectoryInfo
 {
     public static class View
     {
-        public static (List<string[]>, int) prevView;
+        public static (List<string[]>, int,int) prevView;
         public static int[] sizeColum = { -30, 15, 20, 60, 15 };
-        public static void printData(List<string[]> model,int index)
+        public static void PrintData(List<string[]> model,int index,int isMess = 0)
         {
             
             Console.Clear();
             Console.WindowHeight = Console.LargestWindowHeight;
             Console.WindowWidth = Console.LargestWindowWidth;
-            Console.SetCursorPosition(0, 0);
+            int row = Console.CursorTop;
+            int col = Console.CursorLeft;
+            Console.SetCursorPosition(col, row);
 
             Console.Write("|{0," + sizeColum[0] +"}", "Name");
             if (model[1]!=null)
@@ -58,8 +60,9 @@ namespace ConsoleDirectoryInfo
                 Console.ResetColor();
             }
             Console.WriteLine();
+
             Console.WriteLine("Press f1,f2,f3,f4 to change colums");
-            prevView = (model, index);
+            prevView = (model, index,isMess);
         }
 
 
