@@ -12,7 +12,7 @@ namespace ConsoleDirectoryInfo
     {
         public bool[] flags;
         public FileSystemInfo[] folder;
-        public int index;
+        public int index = 0;
         public string path;
         
 
@@ -107,7 +107,7 @@ namespace ConsoleDirectoryInfo
             if (index < folder.Length - 1) index++;
             return ChangeIndex();
         }
-        public (List<string[]>,int) ChangeEnter()
+        public (List<string[]>,int,int) ChangeEnter()
         {
             int mess = 0;
             List<string[]> data = null;
@@ -120,18 +120,21 @@ namespace ConsoleDirectoryInfo
                     data = ChangeData();
             }
             else mess = 2;
-            return (data, mess);
+            return (data, mess,index);
         }
-        public List<string[]> ChangeEscape()
+        public (List<string[]>,int) ChangeEscape()
         {
+            List<string[]> data = null;
             if (path != "C:\\")
             {
                 DirectoryInfo pathInfo = new DirectoryInfo(path);
                 path = pathInfo.Parent.FullName;
                 NewPathModel(path);
-                index = 0;
+                data = ChangeData();
             }
-            return ChangeData();
+            else data = null;
+            index = 0;
+            return (data,index);
         }
         private static bool TryGetDirectory(string path)
         {
