@@ -1,5 +1,7 @@
 ﻿
 
+using ConsoleDirectoryInfo;
+
 namespace Program
 {
     class Program
@@ -65,14 +67,8 @@ namespace Program
             Console.WriteLine();
             Console.WriteLine("Press f1,f2,f3,f4 to change colums");
         }
-        private static FileSystemInfo[] GetMenuItems(string path)
-        {
-            DirectoryInfo test = new(path);
-            FileSystemInfo[] b = test.GetFileSystemInfos();
-            return b;
-        }
         private static bool TryGetDirectory(string path) {
-            try 
+            try
             {
                 DirectoryInfo test = new(path);
                 var b = test.GetDirectories();
@@ -90,14 +86,13 @@ namespace Program
         static void DirectoryMenu(string path)
         {
             bool[] flags = new bool[4] { false,false,false,false};
-            FileSystemInfo[] menuItems = GetMenuItems(path);
+            FileSystemInfo[] menuItems = (new DirectoryInfo(path)).GetFileSystemInfos();
             int row = Console.CursorTop;
             int col = Console.CursorLeft;
             int index = 0;
+            DrawMenu(menuItems, row, col, index, flags);
             while (true)
             {
-                DrawMenu(menuItems, row, col, index,flags);
-
                 switch (Console.ReadKey(true).Key)
                 {
                     case ConsoleKey.F1:
@@ -130,7 +125,7 @@ namespace Program
                         {
                             
                             path += "\\" + menuItems[index].Name;
-                            menuItems = GetMenuItems(path);
+                            menuItems = (new DirectoryInfo(path)).GetFileSystemInfos();
                             index = 0;
                             Console.Clear();
                         }
@@ -140,28 +135,22 @@ namespace Program
                         {
                             DirectoryInfo pathInfo = new DirectoryInfo(path);
                             path = pathInfo.Parent.FullName;
-                            menuItems = GetMenuItems(path);
+                            menuItems = (new DirectoryInfo(path)).GetFileSystemInfos();
                             index = 0;
                             Console.Clear();
                         }
                         break;
-
+                    default: 
+                        continue;
                 }
+                DrawMenu(menuItems, row, col, index, flags);
             }
         }
         static void Main(string[] args)
         {
             string path = "C:\\";
-            DirectoryMenu(path);
-
-            /*DirectoryInfo test = new(path);
-            var b = test.GetFileSystemInfos();
-            for (int i = 0; i < b.Length; i++)
-            {
-                Console.Write("|{0,-40}|{1,30}", b[i].Name, b[i].Name);
-                Console.Write("|{0,-40}|", b[i].CreationTime);
-            }*/
-
+            //DirectoryMenu(path);
+            Controller cnt = new Controller();
 
         }
     }
