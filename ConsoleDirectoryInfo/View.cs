@@ -10,8 +10,9 @@ namespace ConsoleDirectoryInfo
     public static class View
     {
         public static (List<string[]>, int) prevView;
-        public static int[] sizeColum = { -30, 15, 20, 60, 15 };
-        public static void PrintData(List<string[]> model,int index)
+        public static int[] sizeColum = { -30, 15, 20, 60, 10 };
+        public static int index = 0;
+        public static void PrintNewData(List<string[]> model)//вызывать только при первом запуске, Enter, Escape 
         {
             Console.ResetColor();
             Console.Clear();
@@ -42,7 +43,7 @@ namespace ConsoleDirectoryInfo
 
             for (int i = 0; i < model[0].Length; i++)
             {
-                if (i == index)
+                if (i == 0)
                 {
                     Console.BackgroundColor = Console.ForegroundColor;
                     Console.ForegroundColor = ConsoleColor.Black;
@@ -60,7 +61,6 @@ namespace ConsoleDirectoryInfo
                 Console.ResetColor();
             }
             Console.WriteLine();
-            //if (isMess != 0) PrintDopMess();
             Console.WriteLine("Press f1,f2,f3,f4 to change colums");
             prevView = (model, index);
         }
@@ -80,33 +80,5 @@ namespace ConsoleDirectoryInfo
 
         }
 
-        public static void UpdateItemMenu(int newIndex) 
-        {
-            int prevIndex = prevView.Item2;
-            int h = (newIndex - prevIndex);
-            
-            List<string[]> prevData = prevView.Item1;
-            Console.SetCursorPosition(0,newIndex);
-            Console.BackgroundColor = Console.ForegroundColor;
-            Console.ForegroundColor = ConsoleColor.Black;
-            for (int j = 0; j < prevData.Count; j++) 
-                if (prevData[j] != null)
-                Console.Write("|{0," + sizeColum[j] + "}",
-                    prevData[j][newIndex].Length > Math.Abs(sizeColum[j]) ?
-                    prevData[j][newIndex].Substring(0, Math.Abs(sizeColum[j])) :
-                    prevData[j][newIndex]);
-            Console.Write("|\n");
-
-            Console.SetCursorPosition(0, prevIndex);
-            Console.ResetColor();
-            for (int j = 0; j < prevData.Count; j++)
-                if (prevData[j] != null)
-                    Console.Write("|{0," + sizeColum[j] + "}",
-                        prevData[j][prevIndex].Length > Math.Abs(sizeColum[j]) ?
-                        prevData[j][prevIndex].Substring(0, Math.Abs(sizeColum[j])) :
-                        prevData[j][prevIndex]);
-            Console.Write("|\n");
-            prevView.Item2 += h;
-        }
     }
 }
