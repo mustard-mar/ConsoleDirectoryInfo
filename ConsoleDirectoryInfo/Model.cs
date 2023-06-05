@@ -24,7 +24,7 @@ namespace ConsoleDirectoryInfo
         }
 
 
-        List<string[]> ChangeData(int isMess=0)
+        List<string[]> ChangeData()
         {
             List<string[]> colums = new List<string[]>();
             var files = folder;
@@ -66,6 +66,37 @@ namespace ConsoleDirectoryInfo
         public List<string[]> GetData()
         {
             return ChangeData();
+        }
+        public List<string[]>? NewPath(int index,out int exp)
+        {
+            if (folder[index].Extension == "") { exp = 1; return null; }
+            else
+            {
+                try
+                {
+
+                    folder = (new DirectoryInfo(folder[index].FullName)).GetFileSystemInfos();
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    exp = 2;
+                    return null;
+                }
+                path = folder[index].FullName;
+                exp = 0;
+                return ChangeData();
+            }
+        }
+        public List<string[]>? BackNewPath()
+        {
+            if (path != "C:\\")
+            {
+                DirectoryInfo pathInfo = new DirectoryInfo(path);
+                path = pathInfo.Parent.Parent.FullName;
+                folder = (new DirectoryInfo(path)).GetFileSystemInfos();
+                return ChangeData();
+            }
+            else return null;
         }
     }
 }

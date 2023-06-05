@@ -121,10 +121,9 @@ namespace Program
                         break;
                     case ConsoleKey.Enter:
                         if (menuItems[index].Extension != "") Console.WriteLine("Открыть можно только директорию");
-                        else if (TryGetDirectory(path + "\\" + menuItems[index].Name))
+                        else if (TryGetDirectory(menuItems[index].FullName))
                         {
-                            
-                            path += "\\" + menuItems[index].Name;
+                            path = menuItems[index].FullName;
                             menuItems = (new DirectoryInfo(path)).GetFileSystemInfos();
                             index = 0;
                             Console.Clear();
@@ -153,5 +152,9 @@ namespace Program
             Controller cnt = new Controller();
 
         }
+        //вывод
+        //выбор
+        //переход на стрелочки
+        //сообщения
     }
 }
