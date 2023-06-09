@@ -34,6 +34,7 @@ namespace ConsoleDirectoryInfo
 
                                     data = tmp;
                                     View.PrintNewData(data);
+                                    index = 0;
                                     break;
                                 case 1:
                                     View.PrintAddMess(1);
@@ -51,6 +52,7 @@ namespace ConsoleDirectoryInfo
                             if (tmp != null)
                             {
                                 data = tmp;
+                                index = 0;
                                 View.PrintNewData(data);
                             }
                             else View.ClearAdditionalMessage();
@@ -64,7 +66,9 @@ namespace ConsoleDirectoryInfo
                         {
                             int prev = index;
                             index--;
-                            View.PrintCurRow(index,prev,0);
+                            View.ClearAdditionalMessage();
+                            View.PrintCurRow(index,prev);
+                            
                         }
                         break;
                     case ConsoleKey.DownArrow:
@@ -72,12 +76,15 @@ namespace ConsoleDirectoryInfo
                         {
                             int prev = index;
                             index++;
-                            View.PrintCurRow(index,prev,+1);
+                            View.ClearAdditionalMessage();
+                            View.PrintCurRow(index,prev);
+                            
                         }
                         break;
                 }
             }
             //View.PrintAddMess(1);
+            //Console.ReadLine();
             //View.ClearAdditionalMessage();
         }
     }

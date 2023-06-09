@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -69,20 +70,21 @@ namespace ConsoleDirectoryInfo
         }
         public List<string[]>? NewPath(int index,out int exp)
         {
-            if (folder[index].Extension == "") { exp = 1; return null; }
+            if (folder[index].Extension != "") { exp = 1; return null; }
             else
             {
+                string tmp = path;
                 try
                 {
-
-                    folder = (new DirectoryInfo(folder[index].FullName)).GetFileSystemInfos();
+                    tmp = folder[index].FullName;
+                    folder = (new DirectoryInfo(tmp).GetFileSystemInfos());
                 }
                 catch (UnauthorizedAccessException)
                 {
                     exp = 2;
                     return null;
                 }
-                path = folder[index].FullName;
+                path = tmp;
                 exp = 0;
                 return ChangeData();
             }
@@ -92,7 +94,7 @@ namespace ConsoleDirectoryInfo
             if (path != "C:\\")
             {
                 DirectoryInfo pathInfo = new DirectoryInfo(path);
-                path = pathInfo.Parent.Parent.FullName;
+                path = pathInfo.Parent.FullName;
                 folder = (new DirectoryInfo(path)).GetFileSystemInfos();
                 return ChangeData();
             }

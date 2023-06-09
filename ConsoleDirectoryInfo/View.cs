@@ -10,10 +10,10 @@ namespace ConsoleDirectoryInfo
 {
     public static class View
     {
-        public static (List<string[]>, int) prevView;
-        public static int[] sizeColum = { -30, 15, 20, 60, 10 };
-        public static int index = 0;
-        public static bool messExists = false;
+        static (List<string[]>, int) prevView;
+        static readonly int[] sizeColum = { -30, 15, 20, 60, 10 };
+        static readonly int index = 0;
+        //public static bool messExists = false;
 
         public static void PrintNewData(List<string[]> model)//вызывать только при первом запуске, Enter, Escape 
         {
@@ -58,7 +58,7 @@ namespace ConsoleDirectoryInfo
                     if (model[j]!=null)
                         Console.Write("|{0," + sizeColum[j] +"}", 
                             model[j][i].Length > Math.Abs(sizeColum[j])?
-                            model[j][i].Substring(0, Math.Abs(sizeColum[j])) :
+                            model[j][i][..Math.Abs(sizeColum[j])] :
                             model[j][i]);
                 }
                 Console.Write("|\n");
@@ -72,23 +72,21 @@ namespace ConsoleDirectoryInfo
         {
 
             //0 - нет сообщений, 1 - сообщение о попытке открытия файла, 2 - сообщение о недоступе
-            
-            Console.WriteLine("");
-            if (isMess == 1)
-            {
+            int row = prevView.Item1[0].Length + 4;
+            Console.SetCursorPosition(0, row);
+            if (isMess == 1) 
                 Console.WriteLine("Невозможно открыть файл");
-            }
             else if (isMess == 2)
                 Console.WriteLine("Отказано в доступе");
 
         }
 
-        public static void PrintCurRow(int newIndex,int prevIndex,int r)
+        public static void PrintCurRow(int newIndex,int prevIndex)
         {
             Console.ResetColor();
-            int row = Console.CursorTop;
-            int col = Console.CursorLeft;
-            Console.SetCursorPosition(0, newIndex+r);
+            //int row = Console.CursorTop;
+            //int col = Console.CursorLeft;
+            Console.SetCursorPosition(0, newIndex + 1);
             Console.BackgroundColor = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Black;
             for (int j = 0; j < sizeColum.Length; j++)
@@ -96,21 +94,23 @@ namespace ConsoleDirectoryInfo
                 if (prevView.Item1[j] != null)
                     Console.Write("|{0," + sizeColum[j] + "}",
                         prevView.Item1[j][newIndex].Length > Math.Abs(sizeColum[j]) ?
-                        prevView.Item1[j][newIndex].Substring(0, Math.Abs(sizeColum[j])) :
+                        prevView.Item1[j][newIndex][..Math.Abs(sizeColum[j])] :
                         prevView.Item1[j][newIndex]);
             }
-            Console.Write("|\n");
+            Console.Write("|");
             Console.ResetColor();
-            Console.SetCursorPosition(0, prevIndex+r);
+            Console.SetCursorPosition(0, prevIndex+1);
             for (int j = 0; j < sizeColum.Length; j++)
             {
                 if (prevView.Item1[j] != null)
                     Console.Write("|{0," + sizeColum[j] + "}",
                         prevView.Item1[j][prevIndex].Length > Math.Abs(sizeColum[j]) ?
-                        prevView.Item1[j][prevIndex].Substring(0, Math.Abs(sizeColum[j])) :
+                        prevView.Item1[j][prevIndex][..Math.Abs(sizeColum[j])] :
                         prevView.Item1[j][prevIndex]);
             }
-            Console.Write("|\n");
+            
+            Console.Write("|");
+            Console.SetCursorPosition(0, newIndex + 1);
             Console.ResetColor();
         }
 
