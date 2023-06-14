@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace ConsoleDirectoryInfo
 {
-    public static class View
+    public class View
     {
-        public static (List<string[]>, int) prevView;
-        public static int[] sizeColum = { -30, 15, 20, 60, 15 };
-        public static void PrintData(List<string[]> model,int index)
+        List<string[]> prevView;
+        static readonly int[] sizeColum = { -30, 15, 20, 60, 10 };
+        int index = 0;
+        public void PrintNewData(List<string[]>? data)
         {
             Console.ResetColor();
             Console.Clear();
@@ -22,25 +23,25 @@ namespace ConsoleDirectoryInfo
             Console.SetCursorPosition(col, row);
 
             Console.Write("|{0," + sizeColum[0] +"}", "Name");
-            if (model[1]!=null)
+            if (data[1]!=null)
             {
                 Console.Write("|{0," + sizeColum[1] +"}", "Size");
             }
-            if (model[2] != null)
+            if (data[2] != null)
             {
                 Console.Write("|{0," + sizeColum[2] +"}", "Creation Time");
             }
-            if (model[3] != null)
+            if (data[3] != null)
             {
                 Console.Write("|{0," + sizeColum[3] +"}", "Attributes");
             }
-            if (model[4] != null)
+            if (data[4] != null)
             {
                 Console.Write("|{0," + sizeColum[4] +"}", "Extension");
             }
             Console.Write("|\n");
 
-            for (int i = 0; i < model[0].Length; i++)
+            for (int i = 0; i < data[0].Length; i++)
             {
                 if (i == index)
                 {
@@ -48,13 +49,13 @@ namespace ConsoleDirectoryInfo
                     Console.ForegroundColor = ConsoleColor.Black;
                 }
 
-                for (int j = 0; j < model.Count; j++)
+                for (int j = 0; j < data.Count; j++)
                 {
-                    if (model[j]!=null)
+                    if (data[j]!=null)
                         Console.Write("|{0," + sizeColum[j] +"}", 
-                            model[j][i].Length > Math.Abs(sizeColum[j])?
-                            model[j][i].Substring(0, Math.Abs(sizeColum[j])) :
-                            model[j][i]);
+                            data[j][i].Length > Math.Abs(sizeColum[j])?
+                            data[j][i][..Math.Abs(sizeColum[j])] :
+                            data[j][i]);
                 }
                 Console.Write("|\n");
                 Console.ResetColor();
@@ -62,13 +63,11 @@ namespace ConsoleDirectoryInfo
             Console.WriteLine();
             //if (isMess != 0) PrintDopMess();
             Console.WriteLine("Press f1,f2,f3,f4 to change colums");
-            prevView = (model, index);
+            prevView = data;
         }
-        public static void PrintDopMess(int isMess)
+        public void PrintAddMess(int isMess)
         {
-
-            //0 - нет сообщений, 1 - сообщение о попытке открытия файла, 2 - сообщение о недоступе
-            int row = prevView.Item1[0].Length+3;
+            int row = prevView[0].Length + 4;
             Console.SetCursorPosition(0, row);
             if (isMess == 1)
             {
@@ -77,36 +76,42 @@ namespace ConsoleDirectoryInfo
             }
             else if (isMess == 2)
                 Console.WriteLine("Отказано в доступе");
-
         }
-
-        public static void UpdateItemMenu(int newIndex) 
+        public void PrintCurRow(int newIndex,int prevIndex)
         {
-            int prevIndex = prevView.Item2;
-            int h = (newIndex - prevIndex);
-            
-            List<string[]> prevData = prevView.Item1;
-            Console.SetCursorPosition(0,newIndex);
+            ClearAdditionalMessage();
+            Console.ResetColor();
+            Console.SetCursorPosition(0, newIndex + 1);
             Console.BackgroundColor = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Black;
-            for (int j = 0; j < prevData.Count; j++) 
-                if (prevData[j] != null)
-                Console.Write("|{0," + sizeColum[j] + "}",
-                    prevData[j][newIndex].Length > Math.Abs(sizeColum[j]) ?
-                    prevData[j][newIndex].Substring(0, Math.Abs(sizeColum[j])) :
-                    prevData[j][newIndex]);
-            Console.Write("|\n");
-
-            Console.SetCursorPosition(0, prevIndex);
-            Console.ResetColor();
-            for (int j = 0; j < prevData.Count; j++)
-                if (prevData[j] != null)
+            for (int j = 0; j < sizeColum.Length; j++)
+            {
+                if (prevView[j] != null)
                     Console.Write("|{0," + sizeColum[j] + "}",
-                        prevData[j][prevIndex].Length > Math.Abs(sizeColum[j]) ?
-                        prevData[j][prevIndex].Substring(0, Math.Abs(sizeColum[j])) :
-                        prevData[j][prevIndex]);
-            Console.Write("|\n");
-            prevView.Item2 += h;
+                        prevView[j][newIndex].Length > Math.Abs(sizeColum[j]) ?
+                        prevView[j][newIndex][..Math.Abs(sizeColum[j])] :
+                        prevView[j][newIndex]);
+            }
+            Console.Write("|");
+            Console.ResetColor();
+            Console.SetCursorPosition(0, prevIndex+1);
+            for (int j = 0; j < sizeColum.Length; j++)
+            {
+                if (prevView[j] != null)
+                    Console.Write("|{0," + sizeColum[j] + "}",
+                        prevView[j][prevIndex].Length > Math.Abs(sizeColum[j]) ?
+                        prevView[j][prevIndex][..Math.Abs(sizeColum[j])] :
+                        prevView[j][prevIndex]);
+            }
+            Console.Write("|");
+            Console.SetCursorPosition(0, newIndex + 1);
+            Console.ResetColor();
+        }
+        public void ClearAdditionalMessage()
+        {
+            int row = prevView[0].Length + 4;
+            Console.SetCursorPosition(0, row);
+            Console.Write("                                            ");
         }
     }
 }

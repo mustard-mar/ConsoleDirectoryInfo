@@ -10,26 +10,16 @@ namespace ConsoleDirectoryInfo
 {
     public class Model
     {
-        public bool[] flags;
-        public FileSystemInfo[] folder;
-        public int index = 0;
-        public string path;
-        
-
+        private bool[] flags;
+        private FileSystemInfo[] folder;
+        private string path;
         public Model(string path)
         {
             flags =new bool[4]{ true, true, true, true };
             folder = (new DirectoryInfo(path)).GetFileSystemInfos();
             this.path = path;
-
         }
-
-        int ChangeIndex()
-        {
-            return index;
-        }
-
-        List<string[]> ChangeData(int isMess=0)
+        public List<string[]> GetData()
         {
             List<string[]> colums = new List<string[]>();
             var files = folder;
@@ -68,56 +58,25 @@ namespace ConsoleDirectoryInfo
             return "Error";
         }
         
-        public void NewPathModel(string path)
+        public List<string[]>? NewPath(int index,out int exp)
         {
-            folder = (new DirectoryInfo(path)).GetFileSystemInfos();
-            this.path = path;
-        }
-        public (List<string[]>,int) GetData()
-        {
-            return (ChangeData(),ChangeIndex());
-        }
-        public List<string[]> ChangeF1()
-        {
-            flags[0] = !flags[0];
-            return ChangeData();
-        }
-        public List<string[]> ChangeF2()
-        {
-            flags[1] = !flags[1];
-            return ChangeData();
-        }
-        public List<string[]> ChangeF3()
-        {
-            flags[2] = !flags[2];
-            return ChangeData();
-        }
-        public List<string[]> ChangeF4()
-        {
-            flags[3] = !flags[3];
-            return ChangeData();
-        }
-        public int ChangeUpArrow()
-        {
-            if (index > 0) index--;
-            return ChangeIndex();
-        }
-        public int ChangeDownArrow()
-        {
-            if (index < folder.Length - 1) index++;
-            return ChangeIndex();
-        }
-        public (List<string[]>,int,int) ChangeEnter()
-        {
-            int mess = 0;
-            List<string[]> data = null;
-            if (folder[index].Extension != "") mess = 1;
-            else if (TryGetDirectory(path + "\\" + folder[index].Name))
+            if (folder[index].Extension != "") { exp = 1; return null; }
+            else
             {
-                    path += "\\" + folder[index].Name;
-                    NewPathModel(path);
-                    index = 0;
-                    data = ChangeData();
+                string tmp = path;
+                try
+                {
+                    tmp = folder[index].FullName;
+                    folder = (new DirectoryInfo(tmp).GetFileSystemInfos());
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    exp = 2;
+                    return null;
+                }
+                path = tmp;
+                exp = 0;
+                return GetData();
             }
             else mess = 2;
             return (data, mess,index);
@@ -129,23 +88,8 @@ namespace ConsoleDirectoryInfo
             {
                 DirectoryInfo pathInfo = new DirectoryInfo(path);
                 path = pathInfo.Parent.FullName;
-                NewPathModel(path);
-                data = ChangeData();
-            }
-            else data = null;
-            index = 0;
-            return (data,index);
-        }
-        private static bool TryGetDirectory(string path)
-        {
-            try
-            {
-                DirectoryInfo test = new(path);
-                var b = test.GetDirectories();
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                return false;
+                folder = (new DirectoryInfo(path)).GetFileSystemInfos();
+                return GetData();
             }
             return true;
         }

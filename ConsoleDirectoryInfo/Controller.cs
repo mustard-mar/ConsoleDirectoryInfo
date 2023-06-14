@@ -1,56 +1,71 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace ConsoleDirectoryInfo
 {
     public class Controller
     {
-
+        private Model model;
+        private View view;
 
         public Controller()
         {
-            Model model = new("C:\\");
-            (List<string[]>, int) data = model.GetData();
-            int isDopMess = 0;//0 - нет сообщений, 1 - сообщение о попытке открытия файла, 2 - сообщение о недоступе
-            View.PrintData(data.Item1, data.Item2);
-            
+            model = new("C:\\");
+            view = new View();
+            int index = 0;
+            List<string[]> data = model.GetData();
+            view.PrintNewData(data);
+            List<string[]> tmp;
             while (true)
             {
                 switch (Console.ReadKey(true).Key)
                 {
-                    case ConsoleKey.F1:
-                        data.Item1 = model.ChangeF1();
-                        break;
-                    case ConsoleKey.F2:
-                        data.Item1 = model.ChangeF2();
-                        break;
-                    case ConsoleKey.F3:
-                        data.Item1 = model.ChangeF3();
-                        break;
-                    case ConsoleKey.F4:
-                        data.Item1 = model.ChangeF4();
-                        break;
-                    case ConsoleKey.DownArrow:
-                        data.Item2 = model.ChangeDownArrow();
-                        View.UpdateItemMenu(data.Item2);
+                    case ConsoleKey.Enter:
+                        {
+                            tmp = model.NewPath(index, out int error);
+                            switch (error)
+                            {
+                                case 0:
+                                    data = tmp;
+                                    view.PrintNewData(data);
+                                    index = 0;
+                                    break;
+                                case 1:
+                                case 2:
+                                    view.PrintAddMess(error);
+                                    break;
+                            };
+                            break;
+                        }
+                    case ConsoleKey.Escape:
+                        {
+                            tmp = model.BackNewPath();
+                            if (tmp != null)
+                            {
+                                data = tmp;
+                                index = 0;
+                                view.PrintNewData(data);
+                            }
+                            else view.ClearAdditionalMessage();
+                            break;
+                        }
+                    case ConsoleKey.Q:
+                        Environment.Exit(0);
                         break;
                     case ConsoleKey.UpArrow:
-                        data.Item2 = model.ChangeUpArrow();
-                        View.UpdateItemMenu(data.Item2);
+                        if (index > 0)
+                        {
+                            int prev = index;
+                            index--;
+                            view.PrintCurRow(index,prev);
+                            
+                        }
                         break;
-                    case ConsoleKey.Enter:
-                        (data.Item1,isDopMess,data.Item2) = model.ChangeEnter();
-                        if (data.Item1 != null) View.PrintData(data.Item1, data.Item2);
-                        else View.PrintDopMess(isDopMess);
-                        break;
-                    case ConsoleKey.Escape:
-                        (data.Item1,data.Item2) = model.ChangeEscape();
-                        if (data.Item1 != null) View.PrintData(data.Item1,data.Item2);
+                    case ConsoleKey.DownArrow:
+                        if (index < data[0].Length - 1)
+                        {
+                            int prev = index;
+                            index++;
+                            view.PrintCurRow(index,prev);  
+                        }
                         break;
                     default:
                         continue;
