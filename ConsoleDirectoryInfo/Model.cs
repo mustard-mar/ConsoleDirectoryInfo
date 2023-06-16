@@ -14,11 +14,19 @@ namespace ConsoleDirectoryInfo
         public bool[] flags;
         public FileSystemInfo[] folder;
         public string path;
+<<<<<<< Updated upstream
         
 
         public Model(string path)
         {
             flags =new bool[4]{ true, true, false, true };
+=======
+
+
+        public Model(string path)
+        {
+            flags = new bool[4] { true, true, false, true };
+>>>>>>> Stashed changes
             folder = (new DirectoryInfo(path)).GetFileSystemInfos();
             this.path = path;
 
@@ -30,7 +38,7 @@ namespace ConsoleDirectoryInfo
             List<string[]> colums = new List<string[]>();
             var files = folder;
 
-            for (int i = 0; i < flags.Length+1; i++)
+            for (int i = 0; i < flags.Length + 1; i++)
             {
 
                 if (i == 0 || flags[i - 1])
@@ -48,12 +56,13 @@ namespace ConsoleDirectoryInfo
         }
         string SetData(int param, FileSystemInfo file)
         {
-            switch(param){
+            switch (param)
+            {
                 case 0:
                     return file.Name;
                 case 1:
-                    return  ((file.Attributes & FileAttributes.Directory) != FileAttributes.Directory)?
-                       ((FileInfo)file).Length / 1024 + " Кб":"Directory";
+                    return ((file.Attributes & FileAttributes.Directory) != FileAttributes.Directory) ?
+                       ((FileInfo)file).Length / 1024 + " Кб" : "Directory";
                 case 2:
                     return file.CreationTime.ToString();
                 case 3:
@@ -63,12 +72,20 @@ namespace ConsoleDirectoryInfo
             }
             return "Error";
         }
+<<<<<<< Updated upstream
         
+=======
+
+>>>>>>> Stashed changes
         public List<string[]> GetData()
         {
             return ChangeData();
         }
+<<<<<<< Updated upstream
         public List<string[]>? NewPath(int index,out int exp)
+=======
+        public List<string[]>? NewPath(int index, out int exp)
+>>>>>>> Stashed changes
         {
             if (folder[index].Extension != "") { exp = 1; return null; }
             else
