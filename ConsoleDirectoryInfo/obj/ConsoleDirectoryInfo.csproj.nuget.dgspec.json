@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mustard\\Documents\\GitHub\\ConsoleDirectoryInfo\\ConsoleDirectoryInfo\\ConsoleDirectoryInfo.csproj": {}
+    "C:\\Users\\makma\\GitHub\\ConsoleDirectoryInfo\\ConsoleDirectoryInfo\\ConsoleDirectoryInfo.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mustard\\Documents\\GitHub\\ConsoleDirectoryInfo\\ConsoleDirectoryInfo\\ConsoleDirectoryInfo.csproj": {
+    "C:\\Users\\makma\\GitHub\\ConsoleDirectoryInfo\\ConsoleDirectoryInfo\\ConsoleDirectoryInfo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mustard\\Documents\\GitHub\\ConsoleDirectoryInfo\\ConsoleDirectoryInfo\\ConsoleDirectoryInfo.csproj",
+        "projectUniqueName": "C:\\Users\\makma\\GitHub\\ConsoleDirectoryInfo\\ConsoleDirectoryInfo\\ConsoleDirectoryInfo.csproj",
         "projectName": "ConsoleDirectoryInfo",
-        "projectPath": "C:\\Users\\mustard\\Documents\\GitHub\\ConsoleDirectoryInfo\\ConsoleDirectoryInfo\\ConsoleDirectoryInfo.csproj",
-        "packagesPath": "C:\\Users\\mustard\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mustard\\Documents\\GitHub\\ConsoleDirectoryInfo\\ConsoleDirectoryInfo\\obj\\",
+        "projectPath": "C:\\Users\\makma\\GitHub\\ConsoleDirectoryInfo\\ConsoleDirectoryInfo\\ConsoleDirectoryInfo.csproj",
+        "packagesPath": "C:\\Users\\makma\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\makma\\GitHub\\ConsoleDirectoryInfo\\ConsoleDirectoryInfo\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\mustard\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\makma\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -55,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

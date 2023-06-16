@@ -1,43 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace ConsoleDirectoryInfo
 {
     public class Model
     {
-        public bool[] flags;
-        public FileSystemInfo[] folder;
-        public string path;
-<<<<<<< Updated upstream
-        
+        private bool[] flags;
+        private FileSystemInfo[] folder;
+        private string path;
 
-        public Model(string path)
-        {
-            flags =new bool[4]{ true, true, false, true };
-=======
 
 
         public Model(string path)
         {
-            flags = new bool[4] { true, true, false, true };
->>>>>>> Stashed changes
+            flags = new bool[4] { true, true, true, true };
             folder = (new DirectoryInfo(path)).GetFileSystemInfos();
             this.path = path;
 
         }
 
 
-        List<string[]> ChangeData()
+        public List<string[]> GetData()
         {
             List<string[]> colums = new List<string[]>();
             var files = folder;
-
             for (int i = 0; i < flags.Length + 1; i++)
             {
 
@@ -54,6 +39,15 @@ namespace ConsoleDirectoryInfo
             }
             return colums;
         }
+        public List<string[]> ChangeColums(ConsoleKey key)
+        {
+            if (key == ConsoleKey.F1) flags[0] = !flags[0];
+            if (key == ConsoleKey.F2) flags[1] = !flags[1];
+            if (key == ConsoleKey.F3) flags[2] = !flags[2];
+            if (key == ConsoleKey.F4) flags[3] = !flags[3];
+            return GetData();
+        }
+
         string SetData(int param, FileSystemInfo file)
         {
             switch (param)
@@ -72,20 +66,8 @@ namespace ConsoleDirectoryInfo
             }
             return "Error";
         }
-<<<<<<< Updated upstream
-        
-=======
 
->>>>>>> Stashed changes
-        public List<string[]> GetData()
-        {
-            return ChangeData();
-        }
-<<<<<<< Updated upstream
-        public List<string[]>? NewPath(int index,out int exp)
-=======
         public List<string[]>? NewPath(int index, out int exp)
->>>>>>> Stashed changes
         {
             if (folder[index].Extension != "") { exp = 1; return null; }
             else
@@ -103,7 +85,7 @@ namespace ConsoleDirectoryInfo
                 }
                 path = tmp;
                 exp = 0;
-                return ChangeData();
+                return GetData();
             }
         }
         public List<string[]>? BackNewPath()
@@ -113,7 +95,7 @@ namespace ConsoleDirectoryInfo
                 DirectoryInfo pathInfo = new DirectoryInfo(path);
                 path = pathInfo.Parent.FullName;
                 folder = (new DirectoryInfo(path)).GetFileSystemInfos();
-                return ChangeData();
+                return GetData();
             }
             else return null;
         }

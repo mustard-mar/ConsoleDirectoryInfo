@@ -11,19 +11,20 @@ namespace ConsoleDirectoryInfo
     public class Controller
     {
 
-
         public Controller()
         {
             Model model = new("C:\\");
+            View view = new View();
             int index = 0;
             int error = 0;
             List<string[]> data = model.GetData();
-            View.PrintNewData(data);
+            view.PrintNewData(data);
             List<string[]> tmp = null;
+            ConsoleKey key;
             while (true)
             {
 
-                switch (Console.ReadKey(true).Key)
+                switch (key=Console.ReadKey(true).Key)
                 {
                     case ConsoleKey.Enter:
                         {
@@ -33,16 +34,16 @@ namespace ConsoleDirectoryInfo
                                 case 0:
 
                                     data = tmp;
-                                    View.PrintNewData(data);
+                                    view.PrintNewData(data);
                                     index = 0;
                                     break;
                                 case 1:
-                                    View.PrintAddMess(1);
+                                    view.PrintAddMess(1);
                                     break;
                                 case 2:
-                                    View.PrintAddMess(2);
+                                    view.PrintAddMess(2);
                                     break;
-                            };//здесь будет обработка
+                            };
 
                             break;
                         }
@@ -53,21 +54,29 @@ namespace ConsoleDirectoryInfo
                             {
                                 data = tmp;
                                 index = 0;
-                                View.PrintNewData(data);
+                                view.PrintNewData(data);
                             }
-                            else View.ClearAdditionalMessage();
+                            else view.ClearAdditionalMessage();
                             break;
                         }
                     case ConsoleKey.Q:
-                        Environment.Exit(0);
+                        view.CloseWindow();
                         break;
+                    case ConsoleKey.F1:
+                    case ConsoleKey.F2:
+                    case ConsoleKey.F3:
+                    case ConsoleKey.F4:
+                        data = model.ChangeColums(key);
+                        view.PrintNewData(data);
+                        break;
+
+
                     case ConsoleKey.UpArrow:
                         if (index > 0)
                         {
                             int prev = index;
                             index--;
-                            View.ClearAdditionalMessage();
-                            View.PrintCurRow(index,prev);
+                            view.PrintCurRow(index,prev);
                             
                         }
                         break;
@@ -76,16 +85,12 @@ namespace ConsoleDirectoryInfo
                         {
                             int prev = index;
                             index++;
-                            View.ClearAdditionalMessage();
-                            View.PrintCurRow(index,prev);
+                            view.PrintCurRow(index,prev);
                             
                         }
                         break;
                 }
             }
-            //View.PrintAddMess(1);
-            //Console.ReadLine();
-            //View.ClearAdditionalMessage();
         }
     }
 }
