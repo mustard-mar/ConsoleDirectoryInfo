@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace ConsoleDirectoryInfo
 {
@@ -13,18 +7,23 @@ namespace ConsoleDirectoryInfo
         private bool[] flags;
         private FileSystemInfo[] folder;
         private string path;
+
+
+
         public Model(string path)
         {
-            flags =new bool[4]{ true, true, true, true };
+            flags = new bool[4] { true, true, true, true };
             folder = (new DirectoryInfo(path)).GetFileSystemInfos();
             this.path = path;
+
         }
+
+
         public List<string[]> GetData()
         {
             List<string[]> colums = new List<string[]>();
             var files = folder;
-
-            for (int i = 0; i < flags.Length+1; i++)
+            for (int i = 0; i < flags.Length + 1; i++)
             {
 
                 if (i == 0 || flags[i - 1])
@@ -40,14 +39,24 @@ namespace ConsoleDirectoryInfo
             }
             return colums;
         }
+        public List<string[]> ChangeColums(ConsoleKey key)
+        {
+            if (key == ConsoleKey.F1) flags[0] = !flags[0];
+            if (key == ConsoleKey.F2) flags[1] = !flags[1];
+            if (key == ConsoleKey.F3) flags[2] = !flags[2];
+            if (key == ConsoleKey.F4) flags[3] = !flags[3];
+            return GetData();
+        }
+
         string SetData(int param, FileSystemInfo file)
         {
-            switch(param){
+            switch (param)
+            {
                 case 0:
                     return file.Name;
                 case 1:
-                    return  ((file.Attributes & FileAttributes.Directory) != FileAttributes.Directory)?
-                       ((FileInfo)file).Length / 1024 + " Кб":"Directory";
+                    return ((file.Attributes & FileAttributes.Directory) != FileAttributes.Directory) ?
+                       ((FileInfo)file).Length / 1024 + " Кб" : "Directory";
                 case 2:
                     return file.CreationTime.ToString();
                 case 3:
@@ -57,8 +66,8 @@ namespace ConsoleDirectoryInfo
             }
             return "Error";
         }
-        
-        public List<string[]>? NewPath(int index,out int exp)
+
+        public List<string[]>? NewPath(int index, out int exp)
         {
             if (folder[index].Extension != "") { exp = 1; return null; }
             else
@@ -78,12 +87,9 @@ namespace ConsoleDirectoryInfo
                 exp = 0;
                 return GetData();
             }
-            else mess = 2;
-            return (data, mess,index);
         }
-        public (List<string[]>,int) ChangeEscape()
+        public List<string[]>? BackNewPath()
         {
-            List<string[]> data = null;
             if (path != "C:\\")
             {
                 DirectoryInfo pathInfo = new DirectoryInfo(path);
@@ -91,7 +97,7 @@ namespace ConsoleDirectoryInfo
                 folder = (new DirectoryInfo(path)).GetFileSystemInfos();
                 return GetData();
             }
-            return true;
+            else return null;
         }
     }
 }

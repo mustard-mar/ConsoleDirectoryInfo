@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Security.Authentication;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ConsoleDirectoryInfo
 {
-    public class View
+    public  class View
     {
-        List<string[]> prevView;
-        static readonly int[] sizeColum = { -30, 15, 20, 60, 10 };
-        int index = 0;
-        public void PrintNewData(List<string[]>? data)
+         List<string[]> prevView;
+         readonly int[] sizeColum = { -30, 15, 20, 60, 10 };
+         readonly int index = 0;
+
+        public  void PrintNewData(List<string[]> data)
         {
+
             Console.ResetColor();
             Console.Clear();
             Console.WindowHeight = Console.LargestWindowHeight;
@@ -43,7 +46,7 @@ namespace ConsoleDirectoryInfo
 
             for (int i = 0; i < data[0].Length; i++)
             {
-                if (i == index)
+                if (i == 0)
                 {
                     Console.BackgroundColor = Console.ForegroundColor;
                     Console.ForegroundColor = ConsoleColor.Black;
@@ -61,23 +64,31 @@ namespace ConsoleDirectoryInfo
                 Console.ResetColor();
             }
             Console.WriteLine();
-            //if (isMess != 0) PrintDopMess();
-            Console.WriteLine("Press f1,f2,f3,f4 to change colums");
+            Console.WriteLine("Press f1, f2, f3, f4 to change colums; Escape, Enter, Up and Down arrows for navigation.");
+            Console.WriteLine("Press Q for exit.");
             prevView = data;
         }
-        public void PrintAddMess(int isMess)
-        {
-            int row = prevView[0].Length + 4;
-            Console.SetCursorPosition(0, row);
-            if (isMess == 1)
-            {
 
+        public void CloseWindow()
+        {
+            int row = prevView[0].Length + 6;
+            Console.SetCursorPosition(0, row);
+            Environment.Exit(0);
+        }
+
+
+        public  void PrintAddMess(int isMess)
+        {
+            int row = prevView[0].Length + 5;
+            Console.SetCursorPosition(0, row);
+            if (isMess == 1) 
                 Console.WriteLine("Невозможно открыть файл");
-            }
             else if (isMess == 2)
                 Console.WriteLine("Отказано в доступе");
+
         }
-        public void PrintCurRow(int newIndex,int prevIndex)
+
+        public  void PrintCurRow(int newIndex,int prevIndex)
         {
             ClearAdditionalMessage();
             Console.ResetColor();
@@ -103,15 +114,19 @@ namespace ConsoleDirectoryInfo
                         prevView[j][prevIndex][..Math.Abs(sizeColum[j])] :
                         prevView[j][prevIndex]);
             }
+            
             Console.Write("|");
             Console.SetCursorPosition(0, newIndex + 1);
             Console.ResetColor();
         }
+
         public void ClearAdditionalMessage()
         {
-            int row = prevView[0].Length + 4;
+            int row = prevView[0].Length + 5;
             Console.SetCursorPosition(0, row);
             Console.Write("                                            ");
         }
+        
+
     }
 }

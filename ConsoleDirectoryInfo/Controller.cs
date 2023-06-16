@@ -1,38 +1,50 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace ConsoleDirectoryInfo
 {
     public class Controller
     {
-        private Model model;
-        private View view;
 
         public Controller()
         {
-            model = new("C:\\");
-            view = new View();
+            Model model = new("C:\\");
+            View view = new View();
             int index = 0;
+            int error = 0;
             List<string[]> data = model.GetData();
             view.PrintNewData(data);
-            List<string[]> tmp;
+            List<string[]> tmp = null;
+            ConsoleKey key;
             while (true)
             {
-                switch (Console.ReadKey(true).Key)
+
+                switch (key=Console.ReadKey(true).Key)
                 {
                     case ConsoleKey.Enter:
                         {
-                            tmp = model.NewPath(index, out int error);
+                            tmp = model.NewPath(index, out error);
                             switch (error)
                             {
                                 case 0:
+
                                     data = tmp;
                                     view.PrintNewData(data);
                                     index = 0;
                                     break;
                                 case 1:
+                                    view.PrintAddMess(1);
+                                    break;
                                 case 2:
-                                    view.PrintAddMess(error);
+                                    view.PrintAddMess(2);
                                     break;
                             };
+
                             break;
                         }
                     case ConsoleKey.Escape:
@@ -48,8 +60,17 @@ namespace ConsoleDirectoryInfo
                             break;
                         }
                     case ConsoleKey.Q:
-                        Environment.Exit(0);
+                        view.CloseWindow();
                         break;
+                    case ConsoleKey.F1:
+                    case ConsoleKey.F2:
+                    case ConsoleKey.F3:
+                    case ConsoleKey.F4:
+                        data = model.ChangeColums(key);
+                        view.PrintNewData(data);
+                        break;
+
+
                     case ConsoleKey.UpArrow:
                         if (index > 0)
                         {
@@ -60,17 +81,15 @@ namespace ConsoleDirectoryInfo
                         }
                         break;
                     case ConsoleKey.DownArrow:
-                        if (index < data[0].Length - 1)
+                        if (index < data[0].Length-1)
                         {
                             int prev = index;
                             index++;
-                            view.PrintCurRow(index,prev);  
+                            view.PrintCurRow(index,prev);
+                            
                         }
                         break;
-                    default:
-                        continue;
                 }
-                
             }
         }
     }

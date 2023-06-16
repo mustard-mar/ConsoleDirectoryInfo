@@ -13,11 +13,6 @@ C:\Users\mustard\Documents\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\obj\
 C:\Users\mustard\Documents\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\obj\Debug\net6.0\ConsoleDirectoryInfo.pdb
 C:\Users\mustard\Documents\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\obj\Debug\net6.0\ConsoleDirectoryInfo.genruntimeconfig.cache
 C:\Users\mustard\Documents\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\obj\Debug\net6.0\ref\ConsoleDirectoryInfo.dll
-C:\Users\makma\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\bin\Debug\net6.0\ConsoleDirectoryInfo.exe
-C:\Users\makma\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\bin\Debug\net6.0\ConsoleDirectoryInfo.deps.json
-C:\Users\makma\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\bin\Debug\net6.0\ConsoleDirectoryInfo.runtimeconfig.json
-C:\Users\makma\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\bin\Debug\net6.0\ConsoleDirectoryInfo.dll
-C:\Users\makma\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\bin\Debug\net6.0\ConsoleDirectoryInfo.pdb
 C:\Users\makma\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\obj\Debug\net6.0\ConsoleDirectoryInfo.csproj.AssemblyReference.cache
 C:\Users\makma\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\obj\Debug\net6.0\ConsoleDirectoryInfo.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\makma\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\obj\Debug\net6.0\ConsoleDirectoryInfo.AssemblyInfoInputs.cache
@@ -26,5 +21,10 @@ C:\Users\makma\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\obj\Debug\net6.0
 C:\Users\makma\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\obj\Debug\net6.0\ConsoleDirectoryInfo.dll
 C:\Users\makma\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\obj\Debug\net6.0\refint\ConsoleDirectoryInfo.dll
 C:\Users\makma\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\obj\Debug\net6.0\ConsoleDirectoryInfo.pdb
+C:\Users\makma\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\bin\Debug\net6.0\ConsoleDirectoryInfo.exe
+C:\Users\makma\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\bin\Debug\net6.0\ConsoleDirectoryInfo.deps.json
+C:\Users\makma\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\bin\Debug\net6.0\ConsoleDirectoryInfo.runtimeconfig.json
+C:\Users\makma\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\bin\Debug\net6.0\ConsoleDirectoryInfo.dll
+C:\Users\makma\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\bin\Debug\net6.0\ConsoleDirectoryInfo.pdb
 C:\Users\makma\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\obj\Debug\net6.0\ConsoleDirectoryInfo.genruntimeconfig.cache
 C:\Users\makma\GitHub\ConsoleDirectoryInfo\ConsoleDirectoryInfo\obj\Debug\net6.0\ref\ConsoleDirectoryInfo.dll
